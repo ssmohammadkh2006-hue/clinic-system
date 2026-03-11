@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-center m-3">✏️ تعديل بيانات المريض</h2>
+
+<form method="POST" class="p-3">
+{% csrf_token %}
+
+<input type="text" name="patient_name" value="{{ patient.patient_name }}" class="form-control mb-2">
+<input type="number" name="age" value="{{ patient.age }}" class="form-control mb-2">
+<input type="text" name="phone" value="{{ patient.phone }}" class="form-control mb-2">
+<input type="date" name="date" value="{{ patient.date|date:'Y-m-d' }}" class="form-control mb-2">
+<input type="text" name="address" value="{{ patient.address }}" class="form-control mb-2">
+
+<input type="number" id="cost" name="cost" value="{{ patient.cost }}" class="form-control mb-2">
+<input type="number" id="paid" name="paid" value="{{ patient.paid }}" class="form-control mb-2">
+<input type="number" id="remaining" name="remaining" value="{{ patient.remaining }}" class="form-control mb-2" readonly>
+
+<input type="text" name="responsible_doctor" value="{{ patient.responsible_doctor }}" class="form-control mb-2">
+<textarea name="medical_history" class="form-control mb-2">{{ patient.medical_history }}</textarea>
+<button type="submit" class="btn btn-success">تعديل</button>
+
+</form>
+
+<script>
+
+const cost = document.getElementById("cost");
+const paid = document.getElementById("paid");
+const remaining = document.getElementById("remaining");
+
+function calculateRemaining() {
+
+    let costValue = parseFloat(cost.value) || 0;
+    let paidValue = parseFloat(paid.value) || 0;
+
+    remaining.value = costValue - paidValue;
+}
+
+cost.addEventListener("input", calculateRemaining);
+paid.addEventListener("input", calculateRemaining);
+
+</script>
+
+{% endblock %}

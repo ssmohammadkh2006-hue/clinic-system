@@ -1,0 +1,158 @@
+body{  
+    font-family: 'Cairo', sans-serif;
+    font-size: larger;
+
+}
+
+/* Navbar  ------------------------------------------------------*/
+.navbar{
+    background: linear-gradient(90deg,#0d6efd,#0dcaf0);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 15px 25px;
+}
+
+.navbar-brand{
+    color:#fff !important;
+    font-weight:bold;
+    font-size:22px;
+}
+
+.navbar-nav .nav-link{
+    color:#fff !important;
+    font-size:23px;
+    margin-left:10px;
+    transition:0.3s;
+}
+
+.navbar-nav .nav-link:hover{
+    color:#080606 !important;
+    transform:translateY(-2px);
+     
+}
+ 
+
+      .card {
+        background-color: rgba(10, 58, 132, 0.457);
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+
+/*dashboard -------------------------------*/
+.card-box{
+
+background:white;
+border-radius:15px;
+padding:25px;
+text-align:center;
+
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+
+transition:0.3s;
+
+}
+
+.card-box:hover{
+
+transform:translateY(-5px);
+box-shadow:0 15px 30px rgba(0,0,0,0.12);
+
+}
+
+.card-title{
+
+font-size:20px;
+color:#444;
+
+}
+
+.card-number{
+
+font-size:32px;
+font-weight:bold;
+
+}
+ 
+
+
+/* Dropdown ------------------------------------------------------ */
+.dropdown-menu{
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+.dropdown-item{
+    transition:0.3s;
+}
+
+.dropdown-item:hover{
+    background-color:#e3f2fd;
+    padding-right:20px;
+}
+
+/* Active link ------------------------------------------------------ */
+.nav-item.active .nav-link{
+    font-weight:bold;
+    border-bottom:2px solid #fff;
+}
+
+/* Hover effect for feature cards ------------------------------------------------------ */
+.hover-scale {
+  transition: transform 0.3s, box-shadow 0.3s;
+    background: linear-gradient(90deg,#0d6efd,#0dcaf0);
+    border-radius: 30px;
+ 
+}
+.hover-scale:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+
+
+.jumbotron{
+    background: linear-gradient(90deg,#0d6efd,#35d0ef); 
+     border-radius: 30px;
+     transition: transform 0.3s, box-shadow 0.9s;
+
+     
+}
+.jumbotron:hover{
+
+     transform:translateY(-10px);
+}
+
+footer{
+    background: linear-gradient(90deg,#0d6dfd57,#35d0ef6c); 
+   
+}
+form{
+    background: linear-gradient(90deg,#0d6dfd28,#35d0ef8f); 
+    border-radius: 10px;
+     
+    transition: transform 0.3s, box-shadow 0.9s;
+
+}
+form:hover{
+     transform:translateY(-10px);
+
+}
+
+.drdr{
+    background-color:rgb(0, 0, 0);
+    color: white;
+}
+
+
+
+
+
+ 
+
+ 
+
+ 
+ 

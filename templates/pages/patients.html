@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!--forms-->
+<h2 class="text-center m-3">📋 إدارة المرضى</h2>
+<form action="" method="POST" class="p-3 ">
+   {% csrf_token %}
+   
+  <input type="text" name="patient_name" placeholder="اسم المريض" class="form-control mb-2" required>
+  <input type="number" name="age" placeholder="العمر" class="form-control mb-2" >
+  <input type="text" name="phone" placeholder="الهاتف" class="form-control mb-2" required>
+  <input type="date" name="date" class="form-control mb-2" >
+  <input type="text" name="address" placeholder="العنوان" class="form-control mb-2">  
+  <input type="number" id="cost" name="cost" placeholder="ألتكلفة" class="form-control mb-2">
+
+  <input type="number" id="paid" name="batch" placeholder="ألدفعة" class="form-control mb-2">
+  <input type="number" id="remaining" name="rest" placeholder="ألباقي" class="form-control mb-2" readonly>
+  
+  <input type="text" name="responsible_doctor" placeholder="ألدكتور ألمسئول" class="form-control mb-2" >
+  <textarea name="medical_history" placeholder="التاريخ الطبي" class="form-control mb-2"></textarea>
+ 
+ 
+ 
+  <button type="submit" class="btn btn-success">إضافة</button>
+</form>
+<br>
+<!--forms-->
+
+
+<!--البحث-->
+<div class="d-flex justify-content-center">
+<form method="GET" class="mb-4 p-3 shadow-sm rounded bg-light" style="width:400px;">
+<div class="input-group">
+<input type="text" name="search" value="{{ request.GET.search }}" class="form-control" placeholder="🔍 ابحث عن اسم المريض أو الدكتور">
+<button class="btn btn-primary" type="submit">
+بحث
+</button>
+</div>
+</form>
+</div>
+<!--البحث-->
+
+<!--الجدول-->
+<table class="table table-striped table-bordered mt-1 text-center">
+  <thead class="thead-dark">
+
+    <tr>
+      <th>الاسم</th>
+      <th>العمر</th>
+      <th>الهاتف</th>
+      <th>العنوان</th>
+      <th>موعد الزيارة</th>
+      <th>التكلفة</th>
+      <th>الدفعة</th>
+      <th>الباقي</th>
+      <th>الدكتور المسؤول</th>
+      <th>التاريخ الطبي</th>
+      <th>التعديل أو الحذف</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for p in all_patients %}
+    <tr>
+      <td class="drdr">{{p.patient_name}}</td>
+      <td>{{p.age}}</td>
+      <td>{{p.phone}}</td>
+      <td>{{p.address}}</td>
+      <td>{{p.date}}</td>
+      <td>{{p.cost}}</td>
+      <td>{{p.paid}}</td>
+      <td>{{p.remaining}}</td>
+      <td class="drdr">{{p.responsible_doctor}}</td>
+      <td>{{p.medical_history}}</td>
+      <td> <a href="{% url 'update_patient' p.id %}" class="btn btn-info btn-sm">تعديل</a>
+          <a href="{% url 'delete_item' 'patient' p.id %}" class="btn btn-danger btn-sm">حذف</a> </td>
+    </tr>
+
+    {% endfor %}
+
+  </tbody>
+</table>
+
+<!--الجدول-->
+
+
+<script>
+
+const cost = document.getElementById("cost");
+const paid = document.getElementById("paid");
+const remaining = document.getElementById("remaining");
+
+function calculateRemaining() {
+
+    let costValue = parseFloat(cost.value) || 0;
+    let paidValue = parseFloat(paid.value) || 0;
+
+    remaining.value = costValue - paidValue;
+}
+
+cost.addEventListener("input", calculateRemaining);
+paid.addEventListener("input", calculateRemaining);
+
+</script>
+
+{% endblock %}

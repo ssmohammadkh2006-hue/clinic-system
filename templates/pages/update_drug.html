@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<h2 class="text-center m-3">💊 تعديل دواء</h2>
+
+<form method="POST" class="p-3">
+
+{% csrf_token %}
+
+<input type="text" name="drug_name" value="{{drug.drug_name}}" class="form-control mb-2">
+
+<input type="number" name="quantity" value="{{drug.quantity}}" class="form-control mb-2">
+
+<input type="date" name="date" value="{{ drug.date|date:'Y-m-d' }}" class="form-control mb-2" required>
+
+<button type="submit" class="btn btn-success">تعديل</button>
+
+</form>
+<br>  
+</div>
+
+{% endblock %}

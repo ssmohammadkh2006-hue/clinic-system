@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<h2 class="text-center m-3">👨‍⚕️ تعديل طبيب</h2>
+
+<form method="POST" class="p-3">
+
+{% csrf_token %}
+
+<input type="text" name="doctor_name" value="{{doctor.doctors_name}}" class="form-control mb-2">
+
+<input type="text" name="specialisation" value="{{doctor.specialisation}}" class="form-control mb-2">
+
+<input type="text" name="phone" value="{{doctor.phone}}" class="form-control mb-2">
+
+<button type="submit" class="btn btn-success">تعديل</button>
+
+</form>
+
+</div>
+
+{% endblock %}

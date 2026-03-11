@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ 
+<!--dashboard-->
+<div class="container mt-5">
+<div class="row text-center">
+
+<div class="col-md-6">
+<div class="card-box">
+<div class="card-title">عدد الأطباء</div>
+<div class="card-number text-success">{{ doctors_count }}</div>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="card-box">
+<div class="card-title">عدد المرضى</div>
+<div class="card-number text-primary">{{ patients_total }}</div>
+</div>
+</div>
+</div>
+</div>
+<!--dashboard-->
+
+<!--content-->
+<div class="jumbotron m-5 ">
+  <h1 class="display-4 text-center mb-3">نظام إدارة العيادة الطبية</h1>
+  <hr class="my-4">
+  <p class="text-center">منصة متكاملة لإدارة المرضى، الأطباء،الممرضين، المواعيد، والأدوية بكل سهولة وأمان، مع تنظيم دقيق للبيانات الطبية لضمان أفضل خدمة صحية</p>
+  <hr class="my-4">
+  <p class="text-center">يساعدك النظام على تسريع إجراءات الحجز، متابعة السجلات الطبية، إصدار التقارير، وتحسين كفاءة العمل داخل العيادة بطريقة احترافية ومنظمة.</p>
+   
+</div>
+<!--content-->
+ 
+<!-- Features -->
+<section class="py-5" style="background: #093b49;">
+  <div class="container">
+    <div class="row text-center">
+
+      <!-- إدارة المرضى -->
+      <div class="col-md-3 mb-4">
+        <div class="card h-100 shadow-sm border-0 rounded-lg hover-scale">
+          <div class="card-body">
+            <h4 class="card-title">📋 إدارة المرضى</h4>
+            <p class="card-text mt-3">تنظيم كامل للسجلات الطبية والبيانات الشخصية مع متابعة دقيقة.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- إدارة المواعيد -->
+      <div class="col-md-3 mb-4">
+        <div class="card h-100 shadow-sm border-0 rounded-lg hover-scale">
+          <div class="card-body">
+            <h4 class="card-title">📅 إدارة المواعيد</h4>
+            <p class="card-text mt-3">جدولة ذكية وتنبيهات تلقائية للحجز والمتابعة.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- إدارة الأطباء -->
+      <div class="col-md-3 mb-4">
+        <div class="card h-100 shadow-sm border-0 rounded-lg hover-scale">
+          <div class="card-body">
+            <h4 class="card-title">👨‍⚕️ إدارة الأطباء</h4>
+            <p class="card-text mt-3">إضافة الأطباء ومتابعة جداولهم بشكل منظم ومرن.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- تقارير وتحليلات -->
+      <div class="col-md-3 mb-4">
+        <div class="card h-100 shadow-sm border-0 rounded-lg hover-scale">
+          <div class="card-body">
+            <h4 class="card-title">📊 تقارير وتحليلات</h4>
+            <p class="card-text mt-3">إحصائيات دقيقة تساعدك على اتخاذ القرار بسرعة وكفاءة.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Features -->
+
+
+{% endblock %}

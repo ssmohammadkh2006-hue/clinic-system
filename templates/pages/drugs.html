@@ -1,0 +1,42 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-center m-3">💊 إدارة الأدوية</h2>
+
+<form action="" method="POST" class="p-3">
+  {% csrf_token %}
+  <input type="text" name="drug_name" placeholder="اسم الدواء" class="form-control mb-2" required>
+  <input type="number" name="quantity" placeholder="الكمية" class="form-control mb-2" required>
+  <input type="date" name="date" class="form-control mb-2" required>
+  <button type="submit" class="btn btn-success">إضافة</button>
+</form>
+
+<table class="table table-striped table-bordered mt-4 text-center">
+  <thead class="thead-dark">
+    <tr>
+      <th>اسم الدواء</th>
+      <th>الكمية</th>
+      <th>تاريخ الانتهاء</th>
+      <th>التعديل أو الحذف</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    {% for p in all_Drugs %}
+    <tr>
+      <td>{{p.drug_name}}</td>
+      <td>{{p.quantity}}</td>
+      <td>{{p.date}}</td>
+      <td> <a href="{% url 'update_drug' p.id %}" class="btn btn-info">تعديل</a>
+           <a href="{% url 'delete_item' 'drug' p.id %}" class="btn btn-danger">حذف</a></td>
+    </tr>
+   
+    {% endfor %}
+   
+  </tbody>
+</table>
+ 
+
+{% endblock %}
