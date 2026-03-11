@@ -1,8 +1,17 @@
+from django.contrib.auth import views as auth_views
+from django.contrib import admin
+
 from django.urls import path
 from . import views
 
+
+
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('admin/', admin.site.urls),
+    path('', views.login_view, name='login'),   # الصفحة الأولى
+    path('index/', views.index, name='index'),
+    
+    
     path('patients/', views.patients, name="patients"),
     path('doctors/', views.doctors, name='doctors'),
     path('nures/', views.nures, name='nures'),
@@ -15,7 +24,6 @@ urlpatterns = [
     
     path('delete/<str:model>/<int:id>/', views.delete_item, name='delete_item'),
     
-    
-    
+ 
     
 ]

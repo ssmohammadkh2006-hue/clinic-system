@@ -2,8 +2,35 @@ from django.shortcuts import render, redirect
 from.models import *
 from .forms import PatientForm, DoctorForm, NuresForm, DrugForm
 from django.utils import timezone
+
 from django.db.models import Q
 
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+ 
+def login_view(request):
+
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            return render(request, 'pages/login.html', {'error': 'Invalid username or password'})
+
+    return render(request, 'pages/login.html')
+
+
+
+
+
+
+
+@login_required
 def index(request): #--------------------------------------------------------
     doctors_count = Doctors.objects.count()
 
@@ -47,6 +74,11 @@ def patients(request):
     }
 
     return render(request, 'pages/patients.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 def doctors(request): #--------------------------------------------------------
     if request.method == "POST":
@@ -127,7 +159,7 @@ def update_doctor(request, id):
 
     if request.method == "POST":
 
-        doctor.doctor_name = request.POST['doctor_name']
+        doctor.doctors_name = request.POST['doctors_name']
         doctor.specialisation = request.POST['specialisation']
         doctor.phone = request.POST['phone']
 
@@ -170,8 +202,8 @@ def update_patient(request, id):
         patient.phone = request.POST['phone']
         patient.date = request.POST['date']
         patient.address = request.POST['address']
-        patient.cost = request.POST['cost']
-        patient.paid = request.POST['paid']
+        patient.cost = request.POST['cost'] or 0
+        patient.paid = request.POST['paid'] or 0
         patient.remaining = request.POST['remaining']
         patient.responsible_doctor = request.POST['responsible_doctor']
         patient.medical_history = request.POST['medical_history']
