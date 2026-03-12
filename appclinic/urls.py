@@ -7,7 +7,6 @@ from . import views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', views.login_view, name='login'),   # الصفحة الأولى
     path('index/', views.index, name='index'),
     
@@ -24,6 +23,6 @@ urlpatterns = [
     
     path('delete/<str:model>/<int:id>/', views.delete_item, name='delete_item'),
     
- 
+    path('export-patients/', views.export_patients_excel, name='export_patients_excel'),
     
 ]

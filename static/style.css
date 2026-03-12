@@ -42,43 +42,50 @@ body{
 
 
 /*dashboard -------------------------------*/
+
 .card-box{
-
-background:white;
-border-radius:15px;
-padding:25px;
-text-align:center;
-
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
-
-transition:0.3s;
-
+    padding:30px;
+    border-radius:12px;
+    color:white;
+    box-shadow:0 6px 15px rgba(0,0,0,0.15);
+    transition:0.3s;
 }
 
 .card-box:hover{
+    transform:translateY(-5px);
+}
 
-transform:translateY(-5px);
-box-shadow:0 15px 30px rgba(0,0,0,0.12);
+/* المرضى */
+.patients-card{
+     background: linear-gradient(135deg,#506b6b,#51cfb2);
+
+}
+
+/* الأطباء */
+.doctors-card{
+    background: linear-gradient(135deg,#506b6b,#51cfb2);
+}
+
+/* الممرضين */
+.nurses-card{
+       background: linear-gradient(135deg,#506b6b,#51cfb2);
 
 }
 
 .card-title{
-
-font-size:20px;
-color:#444;
-
+    font-size:30px;
+    margin-bottom:10px;
 }
 
 .card-number{
-
-font-size:32px;
-font-weight:bold;
-
+    font-size:40px;
+    font-weight:bold;
 }
- 
-
 
 /* Dropdown ------------------------------------------------------ */
+
+
+
 .dropdown-menu{
     border-radius:10px;
     box-shadow:0 8px 20px rgba(0,0,0,0.1);

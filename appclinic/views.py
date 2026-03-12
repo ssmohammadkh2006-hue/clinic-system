@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from.models import *
+
 from .forms import PatientForm, DoctorForm, NuresForm, DrugForm
 from django.utils import timezone
 
@@ -7,6 +8,53 @@ from django.db.models import Q
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+
+import pandas as pd
+from django.http import HttpResponse
+
+
+def export_patients_excel(request):
+
+    patients = Patients.objects.all().values(
+        'patient_name',
+        'age',
+        'phone',
+        'address',
+        'date',
+        'cost',
+        'paid',
+        'remaining',
+        'responsible_doctor',
+        'medical_history'
+    )
+
+    df = pd.DataFrame(list(patients))
+
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+
+    response['Content-Disposition'] = 'attachment; filename="patients_report.xlsx"'
+
+
+    with pd.ExcelWriter(response, engine='openpyxl') as writer:
+        df.to_excel(writer, index=False, sheet_name='Patients')
+
+        worksheet = writer.sheets['Patients']
+
+        worksheet.column_dimensions['A'].width = 25
+        worksheet.column_dimensions['B'].width = 5
+        worksheet.column_dimensions['C'].width = 18
+        worksheet.column_dimensions['D'].width = 15
+        worksheet.column_dimensions['E'].width = 15
+        worksheet.column_dimensions['F'].width = 10
+        worksheet.column_dimensions['G'].width = 10
+        worksheet.column_dimensions['H'].width = 10
+        worksheet.column_dimensions['I'].width = 25
+        worksheet.column_dimensions['J'].width = 40
+
+
+    return response
  
 def login_view(request):
 
@@ -24,26 +72,17 @@ def login_view(request):
 
     return render(request, 'pages/login.html')
 
-
-
-
-
-
-
 @login_required
-def index(request): #--------------------------------------------------------
+def index(request):
+
     doctors_count = Doctors.objects.count()
-
     patients_total = Patients.objects.count()
-
-    today = timezone.now().date()
-
-    appointments_today = Appointments.objects.filter(date=today).count()
+    nurses_count = Nures.objects.count()
 
     context = {
         'doctors_count': doctors_count,
         'patients_total': patients_total,
-        'appointments_today': appointments_today,
+        'nurses_count': nurses_count,
     }
 
     return render(request, 'pages/index.html', context)
@@ -194,30 +233,32 @@ def update_nures(request, id):
 
 
 def update_patient(request, id):
-    patient = Patients.objects.get(id=id)
 
+    patient = get_object_or_404(Patients, id=id)
     if request.method == "POST":
-        patient.patient_name = request.POST['patient_name']
-        patient.age = request.POST['age']
-        patient.phone = request.POST['phone']
-        patient.date = request.POST['date']
-        patient.address = request.POST['address']
-        patient.cost = request.POST['cost'] or 0
-        patient.paid = request.POST['paid'] or 0
-        patient.remaining = request.POST['remaining']
-        patient.responsible_doctor = request.POST['responsible_doctor']
-        patient.medical_history = request.POST['medical_history']
+        patient.patient_name = request.POST.get('patient_name')
+        patient.age = request.POST.get('age') or 0
+        patient.phone = request.POST.get('phone')
+        
+        date_value = request.POST.get('date')
+        if date_value:
+            patient.date = date_value
+        else:
+            patient.date = None
+        
+        patient.address = request.POST.get('address')
+        patient.cost = request.POST.get('cost') or 0
+        patient.paid = request.POST.get('paid') or 0
+        patient.remaining = request.POST.get('remaining') or 0
+        patient.responsible_doctor = request.POST.get('responsible_doctor')
+        patient.medical_history = request.POST.get('medical_history')
 
         patient.save()
-
         return redirect('patients')
-
     context = {
         'patient': patient
     }
-
     return render(request, 'pages/update_patient.html', context)
-
 
 
 
@@ -248,3 +289,5 @@ def delete_item(request, model, id):
     }
 
     return render(request, "pages/delete_confirm.html", context)
+
+ 

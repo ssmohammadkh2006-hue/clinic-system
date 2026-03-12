@@ -30,15 +30,23 @@
 <!--البحث-->
 <div class="d-flex justify-content-center">
 <form method="GET" class="mb-4 p-3 shadow-sm rounded bg-light" style="width:400px;">
+  {% csrf_token %}
 <div class="input-group">
 <input type="text" name="search" value="{{ request.GET.search }}" class="form-control" placeholder="🔍 ابحث عن اسم المريض أو الدكتور">
 <button class="btn btn-primary" type="submit">
 بحث
-</button>
+</button> 
 </div>
 </form>
 </div>
 <!--البحث-->
+
+
+<div class="text-center mb-3">
+<a href="{% url 'export_patients_excel' %}" class="btn btn-success">
+⬇ تصدير المرضى إلى Excel
+</a>
+</div>
 
 <!--الجدول-->
 <table class="table table-striped table-bordered mt-1 text-center">

@@ -36,10 +36,4 @@ class Drugs(models.Model):
     def __str__(self):
         return self.drug_name
     
-class Appointments(models.Model):
-    patient = models.ForeignKey(Patients, on_delete=models.CASCADE)
-    doctor = models.ForeignKey(Doctors, on_delete=models.CASCADE)
-    date = models.DateField()
-
-    def __str__(self):
-        return f"{self.patient} - {self.date}"   
+  
